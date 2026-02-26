@@ -24,15 +24,34 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump patch version in manifest
+      - name: Bump version in manifest
         id: bump
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           CURRENT=$(jq -r '.version' manifest.json)
           IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
-          NEXT_PATCH=$((PATCH + 1))
-          NEXT="$MAJOR.$MINOR.$NEXT_PATCH"
+
+          BUMP_TYPE="patch"
+          if [[ "$COMMIT_MESSAGE" =~ BREAKING[[:space:]_-]CHANGE ]] || [[ "$COMMIT_MESSAGE" =~ ^[^:]+!\: ]]; then
+            BUMP_TYPE="major"
+          elif [[ "$COMMIT_MESSAGE" =~ ^feat(\(.+\))?\: ]]; then
+            BUMP_TYPE="minor"
+          elif [[ "$COMMIT_MESSAGE" =~ ^fix(\(.+\))?\: ]]; then
+            BUMP_TYPE="patch"
+          fi
+
+          if [[ "$BUMP_TYPE" == "major" ]]; then
+            NEXT="$((MAJOR + 1)).0.0"
+          elif [[ "$BUMP_TYPE" == "minor" ]]; then
+            NEXT="$MAJOR.$((MINOR + 1)).0"
+          else
+            NEXT="$MAJOR.$MINOR.$((PATCH + 1))"
+          fi
+
           jq --arg v "$NEXT" '.version = $v' manifest.json > manifest.tmp.json
           mv manifest.tmp.json manifest.json
+          echo "bump_type=$BUMP_TYPE" >> "$GITHUB_OUTPUT"
           echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
           echo "next=$NEXT" >> "$GITHUB_OUTPUT"
           echo "tag=v$NEXT" >> "$GITHUB_OUTPUT"
@@ -41,7 +60,7 @@ jobs:
       - name: Commit version bump
         run: |
           git add manifest.json
-          git commit -m "chore: bump version to ${{ steps.bump.outputs.next }} [skip ci]"
+          git commit -m "chore: bump ${{ steps.bump.outputs.bump_type }} version to ${{ steps.bump.outputs.next }} [skip ci]"
           git push origin main
 
       - name: Create and push tag

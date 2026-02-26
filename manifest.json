@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Proxy Switcher Firefox Native",
-  "version": "2.0.1",
+  "version": "1.2.0",
   "description": "Proxy switcher for Firefox using native proxy.onRequest API (without PAC)",
   "permissions": [
     "proxy",
