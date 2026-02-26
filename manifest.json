@@ -31,10 +31,15 @@
     "96": "icons/96dp.png",
     "512": "icons/512dp.png"
   },
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "proxyswitcher@ushst.ru",
-      "strict_min_version": "109.0"
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   }
 }
