@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "Proxy Switcher Firefox Native",
+  "version": "2.0.0",
+  "description": "Proxy switcher for Firefox using native proxy.onRequest API (without PAC)",
+  "permissions": [
+    "proxy",
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/48dp.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/48dp.png",
+    "96": "icons/96dp.png",
+    "512": "icons/512dp.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "proxyswitcher-native@ushst.ru",
+      "strict_min_version": "109.0"
+    }
+  }
+}

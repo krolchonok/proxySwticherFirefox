@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" style="width: 380px">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>Firefox Proxy Switcher</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+
+  <body>
+    <h1>Proxy Switcher</h1>
+
+    <div class="string">
+      <label>
+        <input type="checkbox" id="masterProxyToggle" />
+        Включить прокси
+      </label>
+    </div>
+
+    <div class="string">
+      <label>
+        <input type="checkbox" id="globalProxyToggle" />
+        Проксировать весь трафик (профиль по умолчанию)
+      </label>
+    </div>
+
+    <div class="progress-panel">
+      <div id="progressLabel">Покрытие вкладок: 0/0</div>
+      <div class="progress-frame">
+        <div id="coverageProgressBar" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <h2>Проксируемые хосты</h2>
+    <ul id="hostList"></ul>
+
+    <div class="add-host-section">
+      <h3>Добавить хост</h3>
+      <div class="string">
+        <label for="addHostProfileSelect">Профиль:</label>
+        <select id="addHostProfileSelect">
+          <option value="">Профиль по умолчанию</option>
+        </select>
+      </div>
+      <div class="string">
+        <input
+          type="text"
+          id="hostInput"
+          placeholder="Хост или URL (example.com)"
+        />
+      </div>
+      <div class="string add-buttons">
+        <button id="addHostBtn" class="btn">Добавить хост</button>
+        <button id="addHostBtnUrl" class="btn btn-info" title="Из URL">
+          Хост из URL
+        </button>
+      </div>
+      <div class="string">
+        <button id="addCurrentTabUrlBtn" class="btn full-width">
+          Добавить хост текущей вкладки
+        </button>
+      </div>
+    </div>
+
+    <div class="add-host-section">
+      <h3>Фильтр вкладок</h3>
+      <div class="string">
+        <input type="text" id="tabFilterInput" placeholder="Поиск по title/url" />
+      </div>
+      <ul id="tabList"></ul>
+    </div>
+
+    <button id="openSettingsPage" class="btn btn-secondary full-width">
+      Расширенные настройки
+    </button>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
