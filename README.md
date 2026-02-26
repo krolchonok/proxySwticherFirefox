@@ -1,6 +1,6 @@
-# Firefox Native Proxy Switcher
+# Proxy Switcher
 
-Новый проект расширения Firefox на базе исходного `proxySwitcher`, но без PAC-скриптов.
+Проект расширения Proxy Switcher на базе исходного `proxySwitcher`, но без PAC-скриптов.
 
 ## Что изменено
 

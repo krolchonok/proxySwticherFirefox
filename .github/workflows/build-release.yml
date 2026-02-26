@@ -55,7 +55,7 @@ jobs:
           echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
           echo "next=$NEXT" >> "$GITHUB_OUTPUT"
           echo "tag=v$NEXT" >> "$GITHUB_OUTPUT"
-          echo "xpi_name=proxy-switcher-firefox-native-$NEXT.xpi" >> "$GITHUB_OUTPUT"
+          echo "xpi_name=proxy-switcher-$NEXT.xpi" >> "$GITHUB_OUTPUT"
 
       - name: Commit version bump
         run: |
