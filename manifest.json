@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Proxy Switcher Firefox Native",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Proxy switcher for Firefox using native proxy.onRequest API (without PAC)",
   "permissions": [
     "proxy",
@@ -12,7 +12,9 @@
     "webRequestBlocking"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "browser_action": {
     "default_popup": "popup.html",
